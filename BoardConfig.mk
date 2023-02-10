@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+DEVICE_PATH := device/samsung/m51
+
 # Bootloader
 BOARD_VENDOR := samsung
 TARGET_SOC := sm6150
@@ -55,9 +57,9 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 QCOM_BOARD_PLATFORMS += sm6150
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/samsung/a71/prebuilt/Image.gz
-TARGET_PREBUILT_DTB := device/samsung/a71/prebuilt/dtb
-BOARD_PREBUILT_DTBOIMAGE := device/samsung/a71/prebuilt/recoverydtbo
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 #BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_INCLUDE_RECOVERY_DTBO := true
 TARGET_KERNEL_ARCH := arm64
@@ -77,7 +79,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset 
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION) --pagesize $(BOARD_KERNEL_PAGESIZE) --board "SRPSL10B002"
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB) --dtb_offset $(BOARD_DTB_OFFSET)
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/a71/bootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/m51/bootimg.mk
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
