@@ -57,28 +57,25 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 QCOM_BOARD_PLATFORMS += sm6150
 
 # Kernel
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 firmware_class.path=/vendor/firmware_mnt/image nokaslr printk.devkmsg=on loop.max_part=7 androidboot.selinux=permissive androidboot.usbconfigfs=true
+BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_RAMDISK_OFFSET := 0x02000000
+BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
-#BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_KERNEL_ARCH := arm64
-
-# Boot
-BOARD_BOOT_HEADER_VERSION := 2
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 firmware_class.path=/vendor/firmware_mnt/image nokaslr printk.devkmsg=on androidboot.selinux=permissive
-BOARD_KERNEL_IMAGE_NAME := Image
-BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_OFFSET := 0x00008000
-BOARD_RAMDISK_OFFSET := 0x02000000
-BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
-BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
-BOARD_DTB_OFFSET := 0x01f00000
-BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) 
-BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION) --pagesize $(BOARD_KERNEL_PAGESIZE) --board "SRPSL10B002"
-BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB) --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/m51/bootimg.mk
 
 # Recovery
@@ -88,7 +85,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+# BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 
 # Dynamic Partitions
 BOARD_SUPER_PARTITION_SIZE := 8053063680
