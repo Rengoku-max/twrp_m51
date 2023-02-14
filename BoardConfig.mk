@@ -97,7 +97,7 @@ BOARD_SAMSUNG_DYNAMIC_PARTITIONS_SIZE := 8048869376
 BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product odm
 
 # System as root
-BOARD_ROOT_EXTRA_FOLDERS := cache carrier dqmdbg efs keydata keyrefuge omr optics prism spu
+BOARD_ROOT_EXTRA_FOLDERS := efs metadata
 BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Workaround for error copying vendor files to recovery ramdisk
@@ -118,14 +118,12 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 2
 # Crypto
 PLATFORM_SECURITY_PATCH := 2025-12-31
 VENDOR_SECURITY_PATCH := 2025-12-31
-PLATFORM_VERSION := 11
 TW_INCLUDE_CRYPTO := false
 TW_INCLUDE_CRYPTO_FBE := false
 TW_INCLUDE_FBE_METADATA_DECRYPT := false
 BOARD_USES_METADATA_PARTITION := true
 
 # TWRP specific build flags
-TW_DEVICE_VERSION := 1_afaneh92
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
@@ -144,6 +142,4 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_USE_TOOLBOX := true
 TARGET_USES_MKE2FS := true
-TW_NO_LEGACY_PROPS := true
 TW_NO_BIND_SYSTEM := true
-TW_BACKUP_EXCLUSIONS := /data/fonts
