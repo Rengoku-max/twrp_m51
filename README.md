@@ -8,3 +8,6 @@ export ALLOW_MISSING_DEPENDENCIES=true
 lunch twrp_m51-eng
 make recoveryimage
 ```
+
+### Links
+* [Kernel source](https://github.com/kokushiborank1/kernel)
